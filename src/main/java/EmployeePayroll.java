@@ -48,6 +48,17 @@ public class EmployeePayroll {
         return employeePayrollData;
     }
 
+    int updateEmployeeDataUsingStatement() {
+        String sql = String.format("update employee_payroll set salary = %.2f where name = '%s';", 2500000.0, "Mark");
+        try (Connection connection = this.establishConnection()) {
+            Statement statement = connection.createStatement();
+            return statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 1;
+    }
+
     private void listDrivers() {
         Enumeration<Driver> driverList = DriverManager.getDrivers();
         while (driverList.hasMoreElements()) {
