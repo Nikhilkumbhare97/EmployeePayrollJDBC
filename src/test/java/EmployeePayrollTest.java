@@ -14,10 +14,18 @@ public class EmployeePayrollTest {
     }
 
     @Test
-    public void givenNewSalaryForEmployee_WhenUpdated_ShouldReturn1() {
+    public void givenNewSalaryForEmployee_WhenUpdatedUsingStatement_ShouldReturn1() {
         EmployeePayroll employeePayroll = new EmployeePayroll();
         employeePayroll.readData();
         int salaryUpdated= employeePayroll.updateEmployeeDataUsingStatement();
+        Assertions.assertEquals(1, salaryUpdated);
+    }
+
+    @Test
+    public void givenNewSalaryForEmployee_WhenUpdatedUsingPreparedStatement_ShouldReturn1() {
+        EmployeePayroll employeePayroll = new EmployeePayroll();
+        employeePayroll.readData();
+        int salaryUpdated= employeePayroll.updateEmployeeDataUsingPreparedStatement("Charlie", 3000000);
         Assertions.assertEquals(1, salaryUpdated);
     }
 }
