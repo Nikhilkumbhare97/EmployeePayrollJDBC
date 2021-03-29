@@ -34,9 +34,10 @@ public class EmployeePayroll {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
+                String gender = resultSet.getString("gender");
                 double salary = resultSet.getDouble("salary");
                 LocalDate startDate = resultSet.getDate("start").toLocalDate();
-                employeePayrollData.add(new EmployeePayrollData(id, name, salary, startDate));
+                employeePayrollData.add(new EmployeePayrollData(id, name, gender, salary, startDate));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,6 +65,20 @@ public class EmployeePayroll {
             e.printStackTrace();
         }
         return 1;
+    }
+
+    public double functionsByGender(String sql, String fn) {
+        establishConnection();
+        ResultSet resultSet;
+        double result = 0;
+        try {
+            resultSet = establishConnection().createStatement().executeQuery(sql);
+            resultSet.next();
+            result = resultSet.getDouble(fn);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
     }
 
     private void listDrivers() {

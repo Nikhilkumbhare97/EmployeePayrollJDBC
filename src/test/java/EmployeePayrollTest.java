@@ -19,7 +19,7 @@ public class EmployeePayrollTest {
         EmployeePayroll employeePayroll = new EmployeePayroll();
         String sql = "SELECT * FROM employee_payroll;";
         employeePayroll.readData(sql);
-        int salaryUpdated= employeePayroll.updateEmployeeDataUsingStatement();
+        int salaryUpdated = employeePayroll.updateEmployeeDataUsingStatement();
         Assertions.assertEquals(1, salaryUpdated);
     }
 
@@ -28,7 +28,7 @@ public class EmployeePayrollTest {
         EmployeePayroll employeePayroll = new EmployeePayroll();
         String sql = "SELECT * FROM employee_payroll;";
         employeePayroll.readData(sql);
-        int salaryUpdated= employeePayroll.updateEmployeeDataUsingPreparedStatement("Charlie", 3000000);
+        int salaryUpdated = employeePayroll.updateEmployeeDataUsingPreparedStatement("Charlie", 3000000);
         Assertions.assertEquals(1, salaryUpdated);
     }
 
@@ -38,5 +38,56 @@ public class EmployeePayrollTest {
         String sql = "SELECT * FROM employee_payroll WHERE start BETWEEN CAST('2019-01-01' AS DATE) AND DATE(NOW());";
         List<EmployeePayrollData> employeePayrollDataList = employeePayroll.readData(sql);
         Assertions.assertEquals(2, employeePayrollDataList.size());
+    }
+
+    @Test
+    public void givenEmployeePayrollDB_WhenRetrived_ShouldMatchSumByGender() {
+        EmployeePayroll employeePayroll = new EmployeePayroll();
+        String sql = "SELECT SUM(salary) FROM employee_payroll WHERE gender='M' GROUP BY gender;";
+        String fn = "SUM(salary)";
+        double result = employeePayroll.functionsByGender(sql, fn);
+        Assertions.assertEquals(3500000, result);
+
+    }
+
+
+    @Test
+    public void givenEmployeePayrollDB_WhenRetrived_ShouldMatchAvgByGender() {
+        EmployeePayroll employeePayroll = new EmployeePayroll();
+        String sql = "SELECT AVG(salary) FROM employee_payroll WHERE gender='M' GROUP BY gender;";
+        String fn = "AVG(salary)";
+        double result = employeePayroll.functionsByGender(sql, fn);
+        Assertions.assertEquals(1750000, result);
+
+    }
+
+    @Test
+    public void givenEmployeePayrollDB_WhenRetrived_ShouldMatchMaxByGender() {
+        EmployeePayroll employeePayroll = new EmployeePayroll();
+        String sql = "SELECT MAX(salary) FROM employee_payroll WHERE gender='M' GROUP BY gender;";
+        String fn = "MAX(salary)";
+        double result = employeePayroll.functionsByGender(sql, fn);
+        Assertions.assertEquals(2500000, result);
+
+    }
+
+    @Test
+    public void givenEmployeePayrollDB_WhenRetrived_ShouldMatchMinByGender() {
+        EmployeePayroll employeePayroll = new EmployeePayroll();
+        String sql = "SELECT MIN(salary) FROM employee_payroll WHERE gender='M' GROUP BY gender;";
+        String fn = "MIN(salary)";
+        double result = employeePayroll.functionsByGender(sql, fn);
+        Assertions.assertEquals(1000000, result);
+
+    }
+
+    @Test
+    public void givenEmployeePayrollDB_WhenRetrived_ShouldMatchCountByGender() {
+        EmployeePayroll employeePayroll = new EmployeePayroll();
+        String sql = "SELECT COUNT(*) FROM employee_payroll WHERE gender='M' GROUP BY gender;";
+        String fn = "COUNT(*)";
+        double result = employeePayroll.functionsByGender(sql, fn);
+        Assertions.assertEquals(2, result);
+
     }
 }
