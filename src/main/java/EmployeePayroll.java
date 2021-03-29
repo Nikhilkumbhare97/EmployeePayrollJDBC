@@ -81,6 +81,21 @@ public class EmployeePayroll {
         return result;
     }
 
+    public int dataInsertionInDatabase(String name,String gender, double salary,String start){
+        try{
+            Connection connection=this.establishConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO employee_payroll(name,gender,salary,start) values(?,?,?,?); ");
+            preparedStatement.setNString(1,name);
+            preparedStatement.setNString(2,gender);
+            preparedStatement.setDouble(3,salary);
+            preparedStatement.setDate(4, Date.valueOf(start));
+            preparedStatement.executeUpdate();
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return 1;
+    }
+
     private void listDrivers() {
         Enumeration<Driver> driverList = DriverManager.getDrivers();
         while (driverList.hasMoreElements()) {

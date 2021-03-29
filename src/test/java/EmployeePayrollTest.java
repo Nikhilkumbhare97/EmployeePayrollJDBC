@@ -11,7 +11,7 @@ public class EmployeePayrollTest {
         String sql = "SELECT * FROM employee_payroll;";
         List<EmployeePayrollData> employeePayrollDataList = employeePayroll.readData(sql);
         System.out.println(employeePayrollDataList.size());
-        Assertions.assertEquals(3, employeePayrollDataList.size());
+        Assertions.assertEquals(4, employeePayrollDataList.size());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class EmployeePayrollTest {
         EmployeePayroll employeePayroll = new EmployeePayroll();
         String sql = "SELECT * FROM employee_payroll WHERE start BETWEEN CAST('2019-01-01' AS DATE) AND DATE(NOW());";
         List<EmployeePayrollData> employeePayrollDataList = employeePayroll.readData(sql);
-        Assertions.assertEquals(2, employeePayrollDataList.size());
+        Assertions.assertEquals(3, employeePayrollDataList.size());
     }
 
     @Test
@@ -89,5 +89,13 @@ public class EmployeePayrollTest {
         double result = employeePayroll.functionsByGender(sql, fn);
         Assertions.assertEquals(2, result);
 
+    }
+
+    @Test
+    public void givenNewDataOfEmployee_WhenRetrived_ShouldReturn1() {
+        EmployeePayroll employeePayroll = new EmployeePayroll();
+        String name="Samaira"; String gender="F"; double salary=2500000; String start="2021-02-21";
+        int result = employeePayroll.dataInsertionInDatabase(name, gender, salary, start);
+        Assertions.assertEquals(1, result);
     }
 }
