@@ -98,4 +98,12 @@ public class EmployeePayrollTest {
         int result = employeePayroll.dataInsertionInDatabase(name, gender, salary, start);
         Assertions.assertEquals(1, result);
     }
+
+    @Test
+    public void givenNewDataOfEmployeeDetails_WhenRetrived_ShouldReturn1() {
+        EmployeePayroll employeePayroll = new EmployeePayroll();
+        Integer employee_id=5; double salary=2200000;
+        int result = employeePayroll.dataInsertionInPayTableDatabase(employee_id, salary);
+        Assertions.assertEquals(1, result);
+    }
 }
