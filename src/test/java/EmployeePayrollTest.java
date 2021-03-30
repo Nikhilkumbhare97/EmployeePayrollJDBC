@@ -12,7 +12,7 @@ public class EmployeePayrollTest {
         String sql = "SELECT * FROM employee_payroll;";
         List<EmployeePayrollData> employeePayrollDataList = employeePayroll.readData(sql);
         System.out.println(employeePayrollDataList.size());
-        Assertions.assertEquals(4, employeePayrollDataList.size());
+        Assertions.assertEquals(6, employeePayrollDataList.size());
     }
 
     @Test
@@ -92,29 +92,37 @@ public class EmployeePayrollTest {
 
     }
 
-    @Test
-    public void givenNewDataOfEmployee_WhenRetrived_ShouldReturn1() throws SQLException {
-        EmployeePayroll employeePayroll = new EmployeePayroll();
-        String name="Saloni"; String gender="F"; double salary=2000000; String start="2021-03-21";
-        int result = employeePayroll.dataInsertionInDatabase(name, gender, salary, start);
-        Assertions.assertEquals(1, result);
-    }
+//    @Test
+//    public void givenNewDataOfEmployee_WhenRetrived_ShouldReturn1() throws SQLException {
+//        EmployeePayroll employeePayroll = new EmployeePayroll();
+//        String name="Saloni"; String gender="F"; double salary=2000000; String start="2021-03-21";
+//        int result = employeePayroll.dataInsertionInDatabase(name, gender, salary, start);
+//        Assertions.assertEquals(1, result);
+//    }
+//
+//    @Test
+//    public void givenNewDataOfEmployeeDetails_WhenRetrived_ShouldReturn1() throws SQLException {
+//        EmployeePayroll employeePayroll = new EmployeePayroll();
+//        Integer employee_id=6; double salary=2000000;
+//        int result = employeePayroll.dataInsertionInPayTableDatabase(employee_id, salary);
+//        Assertions.assertEquals(1, result);
+//    }
+//
+//    @Test
+//    public void givenNewDataOfEmployeeInPayroll_WhenRetrived_ShouldReturn1() throws SQLException {
+//        EmployeePayroll employeePayroll = new EmployeePayroll();
+//        String name="Reshma"; String gender="F"; double salary=2100000; String start="2021-03-27";
+//        Integer employee_id=7;
+//        int result1 = employeePayroll.dataInsertionInDatabase(name, gender, salary, start);
+//        int result2 = employeePayroll.dataInsertionInPayTableDatabase(employee_id, salary);
+//        Assertions.assertEquals(2, result1+result2);
+//    }
 
     @Test
-    public void givenNewDataOfEmployeeDetails_WhenRetrived_ShouldReturn1() throws SQLException {
+    public void deleteDataOfEmployee_WhenRetrived_ShouldReturn1() throws SQLException {
         EmployeePayroll employeePayroll = new EmployeePayroll();
-        Integer employee_id=6; double salary=2000000;
-        int result = employeePayroll.dataInsertionInPayTableDatabase(employee_id, salary);
+        String name="Reshma";
+        int result = employeePayroll.dataDeletionInDatabase(name);
         Assertions.assertEquals(1, result);
-    }
-
-    @Test
-    public void givenNewDataOfEmployeeInPayroll_WhenRetrived_ShouldReturn1() throws SQLException {
-        EmployeePayroll employeePayroll = new EmployeePayroll();
-        String name="Reshma"; String gender="F"; double salary=2100000; String start="2021-03-27";
-        Integer employee_id=7;
-        int result1 = employeePayroll.dataInsertionInDatabase(name, gender, salary, start);
-        int result2 = employeePayroll.dataInsertionInPayTableDatabase(employee_id, salary);
-        Assertions.assertEquals(2, result1+result2);
     }
 }
