@@ -81,30 +81,40 @@ public class EmployeePayroll {
         return result;
     }
 
-    public int dataInsertionInDatabase(String name,String gender, double salary,String start){
+    public int dataInsertionInDatabase(String name,String gender, double salary,String start) throws SQLException {
         try{
             Connection connection=this.establishConnection();
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO employee_payroll(name,gender,salary,start) values(?,?,?,?); ");
             preparedStatement.setNString(1,name);
             preparedStatement.setNString(2,gender);
             preparedStatement.setDouble(3,salary);
             preparedStatement.setDate(4, Date.valueOf(start));
             preparedStatement.executeUpdate();
-        }catch (SQLException throwables){
+            connection.commit();
+        }catch (SQLException throwables) {
             throwables.printStackTrace();
+            establishConnection().rollback();
+        }finally {
+            establishConnection().close();
         }
         return 1;
     }
 
-    public int dataInsertionInPayTableDatabase(Integer employee_id,double salary){
+    public int dataInsertionInPayTableDatabase(Integer employee_id,double salary) throws SQLException {
         try{
             Connection connection=this.establishConnection();
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement=connection.prepareStatement("INSERT INTO employee_details(employee_id,salary) values(?,?); ");
             preparedStatement.setInt(1,employee_id);
             preparedStatement.setDouble(2,salary);
             preparedStatement.executeUpdate();
-        }catch (SQLException throwables){
+            connection.commit();
+        }catch (SQLException throwables) {
             throwables.printStackTrace();
+            establishConnection().rollback();
+        }finally {
+            establishConnection().close();
         }
         return 1;
     }

@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class EmployeePayrollTest {
@@ -92,17 +93,17 @@ public class EmployeePayrollTest {
     }
 
     @Test
-    public void givenNewDataOfEmployee_WhenRetrived_ShouldReturn1() {
+    public void givenNewDataOfEmployee_WhenRetrived_ShouldReturn1() throws SQLException {
         EmployeePayroll employeePayroll = new EmployeePayroll();
-        String name="Samaira"; String gender="F"; double salary=2500000; String start="2021-02-21";
+        String name="Saloni"; String gender="F"; double salary=2000000; String start="2021-03-21";
         int result = employeePayroll.dataInsertionInDatabase(name, gender, salary, start);
         Assertions.assertEquals(1, result);
     }
 
     @Test
-    public void givenNewDataOfEmployeeDetails_WhenRetrived_ShouldReturn1() {
+    public void givenNewDataOfEmployeeDetails_WhenRetrived_ShouldReturn1() throws SQLException {
         EmployeePayroll employeePayroll = new EmployeePayroll();
-        Integer employee_id=5; double salary=2200000;
+        Integer employee_id=6; double salary=2000000;
         int result = employeePayroll.dataInsertionInPayTableDatabase(employee_id, salary);
         Assertions.assertEquals(1, result);
     }
