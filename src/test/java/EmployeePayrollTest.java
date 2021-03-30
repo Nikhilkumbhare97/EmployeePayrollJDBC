@@ -107,4 +107,14 @@ public class EmployeePayrollTest {
         int result = employeePayroll.dataInsertionInPayTableDatabase(employee_id, salary);
         Assertions.assertEquals(1, result);
     }
+
+    @Test
+    public void givenNewDataOfEmployeeInPayroll_WhenRetrived_ShouldReturn1() throws SQLException {
+        EmployeePayroll employeePayroll = new EmployeePayroll();
+        String name="Reshma"; String gender="F"; double salary=2100000; String start="2021-03-27";
+        Integer employee_id=7;
+        int result1 = employeePayroll.dataInsertionInDatabase(name, gender, salary, start);
+        int result2 = employeePayroll.dataInsertionInPayTableDatabase(employee_id, salary);
+        Assertions.assertEquals(2, result1+result2);
+    }
 }
