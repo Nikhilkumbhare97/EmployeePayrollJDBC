@@ -1,4 +1,4 @@
-import org.junit.*;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -51,7 +51,7 @@ public class EmployeePayrollTest {
         String sql = "SELECT SUM(salary) FROM employee_payroll WHERE gender='M' GROUP BY gender;";
         String fn = "SUM(salary)";
         double result = employeePayroll.functionsByGender(sql, fn);
-        Assert.assertEquals(3500000, result,0.1);
+        Assert.assertEquals(3500000, result, 0.1);
 
     }
 
@@ -62,7 +62,7 @@ public class EmployeePayrollTest {
         String sql = "SELECT AVG(salary) FROM employee_payroll WHERE gender='M' GROUP BY gender;";
         String fn = "AVG(salary)";
         double result = employeePayroll.functionsByGender(sql, fn);
-        Assert.assertEquals(1750000, result,0.5);
+        Assert.assertEquals(1750000, result, 0.5);
 
     }
 
@@ -72,7 +72,7 @@ public class EmployeePayrollTest {
         String sql = "SELECT MAX(salary) FROM employee_payroll WHERE gender='M' GROUP BY gender;";
         String fn = "MAX(salary)";
         double result = employeePayroll.functionsByGender(sql, fn);
-        Assert.assertEquals(2500000, result,1);
+        Assert.assertEquals(2500000, result, 1);
 
     }
 
@@ -82,7 +82,7 @@ public class EmployeePayrollTest {
         String sql = "SELECT MIN(salary) FROM employee_payroll WHERE gender='M' GROUP BY gender;";
         String fn = "MIN(salary)";
         double result = employeePayroll.functionsByGender(sql, fn);
-        Assert.assertEquals(1000000, result,0.5);
+        Assert.assertEquals(1000000, result, 0.5);
 
     }
 
@@ -92,7 +92,7 @@ public class EmployeePayrollTest {
         String sql = "SELECT COUNT(*) FROM employee_payroll WHERE gender='M' GROUP BY gender;";
         String fn = "COUNT(*)";
         double result = employeePayroll.functionsByGender(sql, fn);
-        Assert.assertEquals(2, result,(0.5));
+        Assert.assertEquals(2, result, (0.5));
     }
 
     @Test
@@ -148,7 +148,7 @@ public class EmployeePayrollTest {
         System.out.println("Duration Without Thread :" + Duration.between(start, end));
         String sql = "SELECT * FROM employee_payroll;";
         List<EmployeePayrollData> employeePayrollDataList = employeePayroll.readData(sql);
-        Assert.assertEquals(8,employeePayrollDataList.size());
+        Assert.assertEquals(8, employeePayrollDataList.size());
     }
 
     @Test
@@ -163,6 +163,6 @@ public class EmployeePayrollTest {
         System.out.println("Duration With Thread :" + Duration.between(start, end));
         String sql = "SELECT * FROM employee_payroll;";
         List<EmployeePayrollData> employeePayrollDataList = employeePayroll.readData(sql);
-        Assert.assertEquals(10,employeePayrollDataList.size());
+        Assert.assertEquals(10, employeePayrollDataList.size());
     }
 }
